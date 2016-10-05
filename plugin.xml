@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="com.ionicsokolov.autovideoplayer"
+        version="0.1.0">
+
+  <name>AutoVideoPlay</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <asset src="www/autovideoplay.js" target="js/autovideoplay.js"/>
+
+  <js-module src="www/autovideoplay.js" name="autovideoplay">
+    <clobbers target="AutoVideoPlay" />
+  </js-module>
+
+  <platform name="ios">
+    
+    <config-file target="config.xml" parent="/*">
+      <feature name="AutoVideoPlay">
+        <param name="ios-package" value="AutoVideoPlay" />
+      </feature>
+    </config-file>
+
+    <header-file src="src/ios/AutoVideoPlay.h"/>
+    <source-file src="src/ios/AutoVideoPlay.m"/>
+    <header-file src="src/ios/CustomMoviePlayerViewController.h"/>
+    <source-file src="src/ios/CustomMoviePlayerViewController.m"/>
+    <framework src="MediaPlayer.framework" />
+  </platform>
+  
+</plugin>
