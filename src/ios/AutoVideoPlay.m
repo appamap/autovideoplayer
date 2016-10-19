@@ -18,24 +18,30 @@
     NSString* mime = @"video/mp4";
     NSString *extension;
     NSString* ext;
+    BOOL onStorage = NO;
+    NSArray* foo = [fileURL componentsSeparatedByString: @"."];
+    NSString* firstBit = [foo lastObject];
     
     for (NSString * filename in contents)
         {
             extension = [filename pathExtension]; //
             
-            NSString* fullPath = [documentsPath stringByAppendingPathComponent:[fileURL stringByAppendingString:[NSString stringWithFormat:@".%@/", extension]]];
+            fullPath = [documentsPath stringByAppendingPathComponent:[firstBit stringByAppendingString:[NSString stringWithFormat:@".%@/", extension]]];
             
             if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) //does it exist?
             {
+                finalPath =fullPath;
                 if ([extension isEqualToString:@"MP4"]) //what type is it
                 {
                     mime = @"video/mp4";
                     ext = @".MP4";
+                    onStorage = YES;
                 }
                 if ([extension isEqualToString:@"MP3"])
                 {
                     mime = @"video/mp3";
                     ext = @".MP3";
+                    onStorage = YES;
                 }
             }
         }//for
@@ -44,16 +50,14 @@
     
     if((!modalPresent)&&(!delayRequest))
     {
-        if ([fileURL rangeOfString:@"http"].location == NSNotFound)
+        if (onStorage==YES)
         {
             delayRequest=YES;
-            NSString* fullPath = [documentsPath stringByAppendingPathComponent:[fileURL stringByAppendingString:ext]];
-            moviePlayer = [[CustomMoviePlayerViewController alloc] initWithPath:fullPath: NO];  //need to add local play
+            moviePlayer = [[CustomMoviePlayerViewController alloc] initWithPath:finalPath: NO];  //need to add local play
             [moviePlayer setVideoType:mime];
             [moviePlayer readyPlayerLocal];
             [super.viewController presentViewController:moviePlayer animated:YES completion:nil];
         }
-    
             else
         {
             delayRequest=YES;

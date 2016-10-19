@@ -7,6 +7,8 @@
    NSString* fileURL;
    CustomMoviePlayerViewController *moviePlayer;
     BOOL delayRequest;
+    NSString* fullPath;
+    NSString* finalPath;
 }
 
 - (void) autoplay:(CDVInvokedUrlCommand*)command;
