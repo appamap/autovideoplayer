@@ -31,7 +31,7 @@
             if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) //does it exist?
             {
                 finalPath =fullPath;
-                if ([extension isEqualToString:@"MP4"]) //what type is it
+                if ([extension caseInsensitiveCompare:@"MP4"] == NSOrderedSame) //what type is it
                 {
                     mime = @"video/mp4";
                     ext = @".MP4";
